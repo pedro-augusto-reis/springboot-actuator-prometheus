@@ -1,0 +1,10 @@
+services:
+  prometheus:
+    image: prom/prometheus-linux-arm64
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.rules.yml:/etc/prometheus/prometheus.rules.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'

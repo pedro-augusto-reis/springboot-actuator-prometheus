@@ -1,0 +1,10 @@
+groups:
+  - name: application-01
+    rules:
+      - alert: jvm_mem_usage
+        expr: (sum by (instance)(jvm_memory_used_bytes{area="heap"}) / sum by (instance)(jvm_memory_max_bytes{area="heap"})) * 100 > 10
+        labels:
+          severity: warning
+        annotations:
+          summary: "JVM heap warning"
+          description: "JVM heap of instance `{{$labels.instance}}` from application `{{$labels.application}}` is above 10% for one minute. (current=`{{$value}}%`)"
